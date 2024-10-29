@@ -9,27 +9,90 @@
 </head>
 <body>
     
-    <img style="width: 64px; height: 64px; left: 394px; top: 43px; position: absolute" src='assets/back.png' onmouseover="this.src='assets/back-color.png';" onmouseout="this.src='assets/back.png';" />
+    <!-- <img style="width: 64px; height: 64px; left: 394px; top: 43px; position: absolute" src='assets/back.png' onmouseover="this.src='assets/back-color.png';" onmouseout="this.src='assets/back.png';" />
     <img style="width: 64px; height: 64px; left: 1411px; top: 883px; position: absolute" src='assets/help.png' onmouseover="this.src='assets/help-color.png';" onmouseout="this.src='assets/help.png';" />
-        
-    <!-- large table -->
-       <div>
-        <!-- first row -->
-        <div> 
-            <!-- heading -->
-            <div> Books and services </div>
-            <!-- Body of the row -->
-            <div> </div>
-        </div>
-
-
-       </div>
-    
-        <div style="width:400px; left: 1244px; top: 15px; position: absolute">
-            <div style="left: 8.22px; top: 0px; position: absolute; transform: rotate(5.39deg); transform-origin: 0 0; color: black; font-size: 36px; font-family: Gaegu; font-weight: 400; word-wrap: break-word">the</div>
-            <div style="left: 4.22px; top: 25px; position: absolute; transform: rotate(5.39deg); transform-origin: 0 0; color: black; font-size: 36px; font-family: Gaegu; font-weight: 400; ">library adds up</div>
-        </div>
-        <div style="left: 613px; top: 63.58px; position: absolute; transform: rotate(-5.39deg); transform-origin: 0 0; text-align: center; color: black; font-size: 36px; font-family: Gaegu; font-weight: 400; word-wrap: break-word">year 1 @ <library><br/>proposed budget</div>
+         -->
   
+  
+            <table class="tg">
+                <thead>
+              <tr>
+                <th class="heading" colspan="4">year <span id="year-ID">1</span> @ the library <br> proposed budget</th>
+              </tr></thead>
+            <tbody>
+        <td class="section-title" colspan="4">Books and materials</td>
+              <tr class="item" id="item-1">
+                <td class="item-title">Books / other mateirals in collection</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr class="item" id="item-2">
+                <td class="item-title">Collection processing and distributing</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr>
+        <td class="section-title" colspan="4">Personnel</td>
+              </tr>
+              <tr class="item" id="item-1">
+                <td class="item-title">Public services, collections, and access</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr class="item" id="item-2">
+                <td class="item-title">Other departments</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr>
+        <td class="section-title" colspan="4">Buildings</td>
+              </tr>
+              <tr class="item" id="item-1">
+                <td class="item-title">Public services, collections, and access</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr class="item" id="item-2">
+                <td class="item-title">Other departments</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr>
+        <td class="section-title" colspan="4">Other</td>
+              </tr>
+              <tr class="item" id="item-1">
+                <td class="item-title">Programming supplies</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr class="item" id="item-2">
+                <td class="item-title">City costs</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr class="item" id="item-3">
+                <td class="item-title">Software</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+              <tr class="item" id="item-4">
+                <td class="item-title">Other</td>
+                <td class="item-budget"><input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert">alert</td>
+              </tr>
+            </tbody>
+            </table>
+
+    
 </body>
 </html>
