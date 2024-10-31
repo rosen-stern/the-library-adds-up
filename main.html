@@ -17,8 +17,11 @@
     <!-- 
     <img style="width: 64px; height: 64px; left: 1411px; top: 883px; position: absolute" src='assets/help.png' onmouseover="this.src='assets/help-color.png';" onmouseout="this.src='assets/help.png';" />
          -->
+
+         <div class="center-body">
+
     <div class="budget-controls">
-         <img title="View previous approved budget" style="width: 32px;" src='assets/back.png' onmouseover="this.src='assets/back-color.png';" onmouseout="this.src='assets/back.png';" />
+         <img id="previous-button" title="View previous approved budget" style="width: 32px;" src='assets/back.png' onmouseover="this.src='assets/back-color.png';" onmouseout="this.src='assets/back.png';" />
   </div>
 
             <table class="tg">
@@ -35,13 +38,13 @@
 
         <td class="section-title" colspan="4">Books and materials</td>
               <tr class="item" id="item-1">
-                <td class="item-title">Books / other mateirals in collection<br><i>Anticipated cost: $<span id="1-anticipated"></span></i></td>
+                <td class="item-title">Books / other mateirals in collection<br><i>Anticipated cost: $<span class="anticipated" id="1-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
               </tr>
               <tr class="item" id="item-2">
-                <td class="item-title">Collection processing and distributing<br><i>Anticipated cost: $<span id="2-anticipated"></span></i></td>
+                <td class="item-title">Collection processing and distributing<br><i>Anticipated cost: $<span class="anticipated" id="2-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
@@ -50,13 +53,13 @@
         <td class="section-title" colspan="4">Personnel</td>
               </tr>
               <tr class="item" id="item-1">
-                <td class="item-title">Public services, collections, and access<br><i>Anticipated cost: $<span id="3-anticipated"></span></i></td>
+                <td class="item-title">Public services, collections, and access<br><i>Anticipated cost: $<span class="anticipated" id="3-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
               </tr>
               <tr class="item" id="item-2">
-                <td class="item-title">Other departments<br><i>Anticipated cost: $<span id="4-anticipated"></span></i></td>
+                <td class="item-title">Other departments<br><i>Anticipated cost: $<span class="anticipated" id="4-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
@@ -65,13 +68,13 @@
         <td class="section-title" colspan="4">Buildings</td>
               </tr>
               <tr class="item" id="item-1">
-                <td class="item-title">Public services, collections, and access<br><i>Anticipated cost: $<span id="5-anticipated"></span></i></td>
+                <td class="item-title">Rent<br><i>Anticipated cost: $<span class="anticipated" id="5-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
               </tr>
               <tr class="item" id="item-2">
-                <td class="item-title">Other departments<br><i>Anticipated cost: $<span id="6-anticipated"></span></i></td>
+                <td class="item-title">Maintenance and upkeep<br><i>Anticipated cost: $<span class="anticipated" id="6-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
@@ -80,25 +83,25 @@
         <td class="section-title" colspan="4">Other</td>
               </tr>
               <tr class="item" id="item-1">
-                <td class="item-title">Programming supplies<br><i>Anticipated cost: $<span id="7-anticipated"></span></i></td>
+                <td class="item-title">Programming supplies<br><i>Anticipated cost: $<span class="anticipated" id="7-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
               </tr>
               <tr class="item" id="item-2">
-                <td class="item-title">City costs<br><i>Anticipated cost: $<span id="8-anticipated"></span></i></td>
+                <td class="item-title">City costs<br><i>Anticipated cost: $<span class="anticipated" id="8-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
               </tr>
               <tr class="item" id="item-3">
-                <td class="item-title">Software<br><i>Anticipated cost: $<span id="9-anticipated"></span></i></td>
+                <td class="item-title">Software<br><i>Anticipated cost: $<span class="anticipated" id="9-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
               </tr>
               <tr class="item" id="item-4">
-                <td class="item-title">Other<br><i>Anticipated cost: $<span id="10-anticipated"></span></i></td>
+                <td class="item-title">Other<br><i>Anticipated cost: $<span class="anticipated" id="10-anticipated"></span></i></td>
                 <td class="item-budget">$<input class="item-budget-input" type="number"></td>
                 <td class="item-percentage">%</td>
                 <td class="item-alert"></td>
@@ -118,10 +121,14 @@
             </tbody>
             </table>
 
-            <div title="Submit this budget" id="submit-button">
-              
-              <img src="assets/submit.png" style="width: 32px;" id="submit-icon" onmouseover="this.src='assets/submit-color.png';" onmouseout="this.src='assets/submit.png';">
-
+            <div class="submit-wrapper">
+              <div onclick="submitBudget()" title="Approve the budget and move on to next year" id="submit-button" class="button submit">
+                
+                
+                <img src="assets/submit.png" style="width: 32px;" id="submit-icon">
+  <div> approve budget</div>
+              </div>
+  </div>
             </div>
 
             <script src="main.js"></script>

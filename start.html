@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+
+
+
+    
+    <title>the library adds up</title>
+</head>
+<body>
+    
+    <!-- 
+    <img style="width: 64px; height: 64px; left: 1411px; top: 883px; position: absolute" src='assets/help.png' onmouseover="this.src='assets/help-color.png';" onmouseout="this.src='assets/help.png';" />
+         -->
+
+<div class="center-body">
+  
+    <div class="budget-controls" style="display: none;">
+         <img title="View previous approved budget" style="width: 32px;" src='assets/back.png' onmouseover="this.src='assets/back-color.png';" onmouseout="this.src='assets/back.png';" />
+  </div>
+
+            <table class="tg">
+                <thead>
+              <tr>
+                <th class="heading" colspan="4">the library adds up</th>
+              </tr></thead>
+            <tbody>
+              <tr id="total">
+                <td colspan="4" class="">Welcome to your first day as an accountant for a new library.</td>
+                </tr>
+
+        <td class="section-title" colspan="2">Info</td>
+              <tr class="item" id="item-1">
+                <td class="item-title" >Library name</td>
+                <td class="item-budget" style="display: flex; justify-content: flex-end; align-items: center; gap: 40px; border: 1px;"><div><input id="library-name" type="text"> Public Library</div> <div onclick="generateName()" class="button secondary">Suggest a name</div></td>
+                </tr>
+              <tr>
+        <td class="section-title" colspan="2">What you do</td>
+              </tr>
+              <tr class="item" id="item-1">
+                <td colspan="2" class="item-title">Fill out the balance sheet for the library's funds every year. Consider requests, situations, and events ensuring the patrons and staff are happy and the bills get paid. </td>
+                </tr>
+              
+            </tbody>
+            </table>
+<div class="submit-wrapper">
+            <div onclick="startGame()" title="Submit this budget" id="submit-button" class="button submit">
+              
+              
+              <img src="assets/submit.png" style="width: 32px;" id="submit-icon">
+<div> start budgeting</div>
+            </div>
+</div>
+            <!-- <script src="main.js"></script> -->
+            <script src="start.js"></script>
+
+            
+</div>
+
+    
+</body>
+</html>

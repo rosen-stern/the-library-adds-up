@@ -29,7 +29,7 @@ body {
 /* SETTING INPUT WIDTHS  */
 
 .item-budget-input{
-    width: 70px;
+    width: 100px;
 }
 
 .item-percentage {
@@ -61,8 +61,12 @@ body {
 /* TABLE DESIGN */
 
 table{
-    min-width: 75%;
-    margin: auto;
+    
+
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+
 }
 .tg  {
     border-collapse:collapse;
@@ -85,13 +89,41 @@ table{
 
 
 /*  */
-.budget-controls{
-    margin: auto;
-    width: 500px;
+
+.button {
+    display: inline-flex;
+    padding: 8.687px;
+    justify-content: center;
+    align-items: center;
+    gap: 5.791px;
+    border-radius: 8px;
+    border: 0.579px solid #000;
+
+&.submit{
+    float: right;
+    background: #EBFFE3;
 }
 
-.submit-button{
+&:hover {
+    box-shadow: 1px 6px 10px grey;
+
+
+
+}
+
+}
+
+/*  */
+
+.center-body {
+    width: 75%;
     margin: auto;
-    width: 500px;
-    background-color: red;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+.off {
+    pointer-events: none;
 }
