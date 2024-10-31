@@ -61,7 +61,7 @@ body {
 /* TABLE DESIGN */
 
 table{
-    min-width: 50%;
+    min-width: 75%;
     margin: auto;
 }
 .tg  {
@@ -81,4 +81,17 @@ table{
     border-style:solid;
     border-width:1px;
     padding:10px 5px;
+}
+
+
+/*  */
+.budget-controls{
+    margin: auto;
+    width: 500px;
+}
+
+.submit-button{
+    margin: auto;
+    width: 500px;
+    background-color: red;
 }
