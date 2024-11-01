@@ -1,11 +1,7 @@
 /* 
 TO DO: 
 
--Make budgets go UP AND DOWN, not just UP lmao 
-
-- Anticipated costs become NaN after year 1??
-
-
+- Make budgets go UP AND DOWN, not just UP lmao 
 - Make the back button work to view previous budgets
 - Disable textboxes when going to a previous year 
 - Add "alerts" / plot to areas that are going up or down
@@ -39,11 +35,10 @@ var page_year = year;
 var sum = 0;
 var this_year_info = {};
 
-setUp();
+setUp(); //runs the set up for the first time when initializing the game 
 
+function setUp(){ //sets up a new year when you select "submit"
 
-function setUp(){
-    console.log("setting up " + year)
 
 if (!year){
     year = 1;
@@ -51,8 +46,6 @@ if (!year){
     year++;
 }
 
-
-console.log("setting up " + year)
 
 page_year = year;
 sum = 0;
@@ -62,39 +55,27 @@ setUpYear();
 setDefaultBudgets();
 }
 
-function setDefaultBudgets(){
+function setDefaultBudgets(){ //sets the Anticipated Costs of all the items to the set anticipated costs for "this year"
     document.getElementById("year-ID").innerHTML = year;
 
 budget_total.innerHTML = toLocal(this_year_info.budget_total);
 
 for(var i = 0; i < item_budgets_input.length; i++){
-item_budgets_input[i].value = 0;
+
 item_budgets_input[i].setAttribute("onchange", "checkSum(); updatePercentages();"); //when the budget for a specific box is changed, update the sums and percentages
 item_budgets_input[i].setAttribute("step", "0.01"); //display all numbers as two decimal points
 item_budgets_input[i].setAttribute("min", "0"); //no negative numbers allowed
+
+anticipated_spans[i].innerHTML = toLocal(this_year_info.anticipated[i]);
+item_budgets_input[i].value = (this_year_info.anticipated[i]).toFixed(2);
 }
-
-
-anticipated_spans[0].innerHTML = this_year_info.books_anticipated;
-anticipated_spans[1].innerHTML = this_year_info.collection_anticipated;
-
-anticipated_spans[2].innerHTML = this_year_info.public_anticipated;
-anticipated_spans[3].innerHTML = this_year_info.departments_anticipated;
-
-anticipated_spans[4].innerHTML = this_year_info.rent_anticipated;
-anticipated_spans[5].innerHTML = this_year_info.maintenance_anticipated;
-
-anticipated_spans[6].innerHTML = this_year_info.programming_anticipated;
-anticipated_spans[7].innerHTML = this_year_info.city_anticipated;
-anticipated_spans[8].innerHTML = this_year_info.software_anticipated;
-anticipated_spans[9].innerHTML = this_year_info.other_anticipated;
 
 checkSum();
 updatePercentages();
 
 }
 
-function updatePercentages(){
+function updatePercentages(){ //checks all the text boxes numbers as a percentage of the total text box numbers
     for(var i = 0; i < item_percentages_divs.length; i++){ 
         if ( !(item_budgets_input[i].value / sum)){
             item_percentages_divs[i].innerHTML = "0%";
@@ -106,7 +87,7 @@ function updatePercentages(){
     }
 }
 
-function checkSum(){
+function checkSum(){ //adds up all the text boxes numbers and displays it as the "TOTAL" at the bottom
 sum = 0;
 
 for(var i = 0; i < item_budgets_input.length; i++){
@@ -137,104 +118,99 @@ if ( temp_budget < 0 ){
 
 }
 
-function setUpYear(){
-    this_year_info.year = year;
+function getRandomDecimal(min, max, decimals){
 
-
-    if(year == 1){
-        this_year_info.budget_total = 86389995;
-        this_year_info.books_multiplier = 0.021;
-        this_year_info.collection_multiplier = 0.023;
-
-        this_year_info.public_multiplier = 0.65;
-        this_year_info.departments_multiplier = 0.073;
-        
-        this_year_info.rent_multiplier = 0.032;
-        this_year_info.maintenance_multiplier = 0.019;
-
-        this_year_info.programming_multiplier = 0.024;
-        this_year_info.city_multiplier = 0.066;
-        this_year_info.software_multiplier = 0.055;
-        this_year_info.other_multiplier = 0.077;
-
-        document.getElementById("previous-button").style.display = "none";
-    } else {
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.budget_total = budget_history[year-2].budget_total * randPercent;
-
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.books_multiplier = 0.021 + randPercent;
-
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.collection__multiplier = 0.023 + randPercent;
-
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.public_multiplier = 0.65 + randPercent;
-
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.departments_multiplier = 0.073 + randPercent;
-        
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.rent_multiplier = 0.032 + randPercent;
-
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.maintenance_multiplier = 0.019 + randPercent;
-
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.programming_multiplier = 0.024 + randPercent;
-        
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.city_multiplier = 0.066 + randPercent;
-
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.software_multiplier = 0.055 + randPercent;
-
-        randPercent = (Math.random() * (0.1 - 0.005) + 0.005).toFixed(3);
-        this_year_info.other_multiplier = 0.077 + randPercent;
-    }
-
-
-    this_year_info.books_anticipated = toLocal(this_year_info.budget_total * this_year_info.books_multiplier);
-    this_year_info.collection_anticipated =  toLocal(this_year_info.budget_total * this_year_info.collection_multiplier);
-
-    this_year_info.public_anticipated =  toLocal(this_year_info.budget_total * this_year_info.public_multiplier);
-    this_year_info.departments_anticipated =  toLocal(this_year_info.budget_total * this_year_info.departments_multiplier);
-    
-    this_year_info.rent_anticipated = toLocal(this_year_info.budget_total * this_year_info.rent_multiplier);
-    this_year_info.maintenance_anticipated = toLocal(this_year_info.budget_total * this_year_info.maintenance_multiplier);
-
-    this_year_info.programming_anticipated =  toLocal(this_year_info.budget_total * this_year_info.programming_multiplier);
-    this_year_info.city_anticipated =  toLocal(this_year_info.budget_total * this_year_info.city_multiplier);
-    this_year_info.software_anticipated =  toLocal(this_year_info.budget_total * this_year_info.software_multiplier);
-    this_year_info.other_anticipated =  toLocal(this_year_info.budget_total * this_year_info.other_multiplier);
-
+   return Number(Math.random() * (max - min) + min).toFixed(decimals)
 
 }
 
-function toLocal(num){
+function getRandomInteger(min, max) {
+//https://www.w3schools.com/js/js_random.asp
+    return Number(Math.floor(Math.random() * (max - min + 1) ) + min);
+  }
+
+
+function decidePercentage(){
+    randomPicker = getRandomInteger(0,100);
+    
+    if(randomPicker < 10){ //BIG reduction
+        randPercent = getRandomDecimal(0.70, 1, 3);
+    
+    } else if (randomPicker < 20){ //BIG ask
+        randPercent = getRandomDecimal(1.0, 1.3, 3);
+  
+    } else {
+        randPercent = getRandomDecimal(0.9, 1.1, 3);
+    }
+  
+
+    return Number(randPercent);
+}
+
+function setUpYear(){ //sets up to display a new year
+    this_year_info.year = year;
+    this_year_info.multiplier = [];
+    this_year_info.anticipated = [];
+
+    if(year == 1){
+        this_year_info.budget_total = 86389995;
+        
+        this_year_info.multiplier[0] = 0.021;
+        this_year_info.multiplier[1] = 0.023;
+
+        this_year_info.multiplier[2] = 0.65;
+        this_year_info.multiplier[3] = 0.073;
+    
+        this_year_info.multiplier[4] = 0.032;
+        this_year_info.multiplier[5] = 0.019;
+
+        this_year_info.multiplier[6] = 0.024;
+        this_year_info.multiplier[7] = 0.066;
+        this_year_info.multiplier[8] = 0.055;
+        this_year_info.multiplier[9] = 0.077;
+
+        document.getElementById("previous-button").style.display = "none";
+
+        for(var i = 0; i < this_year_info.multiplier.length; i++){
+            this_year_info.anticipated[i] = Number(this_year_info.budget_total) * Number(this_year_info.multiplier[i]);
+            }
+
+        return;
+    } 
+
+        this_year_info.budget_total = budget_history[year-2].budget_total * decidePercentage();
+
+        for(var i = 0; i < item_budgets_input.length; i++){ //there will always be the same amount of anticipated budgets and multipliers as there are input boxes
+            this_year_info.multiplier[i] = decidePercentage();
+        }
+    
+var checkAnticipated = 0;
+   
+    for(var i = 0; i < this_year_info.multiplier.length; i++){
+    this_year_info.anticipated[i] = Number(budget_history[year-2].actual[i]) * Number(this_year_info.multiplier[i]);
+    checkAnticipated += this_year_info.anticipated[i];
+    }
+
+    console.log(checkAnticipated);
+
+}
+
+function toLocal(num){ //converts the int into a readable number with commas, and 2 decimals places 
 return num.toLocaleString(undefined, {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2
 });
 }
 
-function submitBudget(){
+function submitBudget(){ //Goes to the next year
 // Save all the information from this year
-
-this_year_info.books_anticipated =       item_budgets_input[0].value;
-this_year_info.collection_anticipated =  item_budgets_input[1].value;
-this_year_info.public_anticipated =      item_budgets_input[2].value;
-this_year_info.departments_anticipated = item_budgets_input[3].value;
-this_year_info.programming_anticipated = item_budgets_input[4].value;
-this_year_info.city_anticipated =        item_budgets_input[5].value;
-this_year_info.software_anticipated =    item_budgets_input[6].value;
-this_year_info.other_anticipated =       item_budgets_input[7].value;
+this_year_info.actual = [];
+for(var i = 0; i < item_budgets_input.length; i++){
+    this_year_info.actual[i] = item_budgets_input[i].value;
+}
 
 budget_history.push(this_year_info);
 
 // Move to the information screen with results from this year 
 setUp();
-
-console.log("Budget approved!");
-
 }

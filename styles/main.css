@@ -67,6 +67,8 @@ table{
     border-style:solid;
     border-width:1px;
 
+    transition-duration: 600ms;
+
 }
 .tg  {
     border-collapse:collapse;
@@ -130,4 +132,10 @@ table{
 
 .red {
     color: red;
+}
+
+
+/* ANIMATIONS */
+.animate-leave {
+    transform: translate(100%)
 }
