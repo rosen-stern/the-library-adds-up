@@ -1,14 +1,12 @@
 /* 
 TO DO: 
 
-- Make budgets go UP AND DOWN, not just UP lmao 
 - Make the back button work to view previous budgets
 - Disable textboxes when going to a previous year 
-- Add "alerts" / plot to areas that are going up or down
 - Add lose condition, and end screen
-- Add "alerts" to the history
 
 */
+var big_table = document.getElementById("big-table");
 
 var item_budgets_input = document.getElementsByClassName("item-budget-input");
 var item_percentages_divs = document.getElementsByClassName("item-percentage");
@@ -177,7 +175,7 @@ function setUpYear(){ //sets up to display a new year
 
         return;
     } 
-
+        // console.log("last year's budgte total: " + budget_history[year-2].budget_total + " | " + year);
         this_year_info.budget_total = budget_history[year-2].budget_total * decidePercentage();
 
         for(var i = 0; i < item_budgets_input.length; i++){ //there will always be the same amount of anticipated budgets and multipliers as there are input boxes
@@ -212,5 +210,17 @@ for(var i = 0; i < item_budgets_input.length; i++){
 budget_history.push(this_year_info);
 
 // Move to the information screen with results from this year 
-setUp();
+
+big_table.style.animation = "move 2400ms 1";
+
+setTimeout(() => {
+    setUp();
+}, 1200);
+
 }
+
+
+big_table.addEventListener("animationend", function() {
+    big_table.style.animation = "none";
+});
+
