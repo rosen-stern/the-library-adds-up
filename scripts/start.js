@@ -35,5 +35,6 @@ randomIndex1 = Math.floor(Math.random() * library_names[1].length);
 function startGame(){
 
     let library_name = library_name_input.value;
+    localStorage.setItem("library_name", library_name);
     window.location.href = "main.html";
 }

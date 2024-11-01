@@ -127,3 +127,7 @@ table{
 .off {
     pointer-events: none;
 }
+
+.red {
+    color: red;
+}
