@@ -25,27 +25,12 @@
               <tr>
                 <th class="heading" id="newspaper-headline" colspan="4"> </th>
               </tr></thead>
-            <tbody>
-              <tr id="total">
-                <td class="">Budget total</td>
-                <td class="budget-total" colspan="2" style="border: 1px solid black !important;">$<span id="budget-total">#</span></td>
-                <td class="item-alert"></td>
-              </tr>
+  
 
-        <td class="section-title" colspan="4">Books and materials</td>
-              <tr class="item" id="item-1">
-                <td class="item-title">Books / other mateirals in collection<br><i>Anticipated cost: $<span class="anticipated" id="1-anticipated"></span></i></td>
-                <td class="item-budget">$<input class="item-budget-input" type="number"></td>
-                <td class="item-percentage">%</td>
-                <td class="item-alert"></td>
-              </tr>
-              <tr class="item" id="item-2">
-                <td class="item-title">Collection processing and distributing<br><i>Anticipated cost: $<span class="anticipated" id="2-anticipated"></span></i></td>
-                <td class="item-budget">$<input class="item-budget-input" type="number"></td>
-                <td class="item-percentage">%</td>
-                <td class="item-alert"></td>
-              </tr>
-              <tr>
+
+        <td class="graph" colspan="4">  <div id="chart-container">
+          <div id="legend" class="legend-container"></div>
+        </div></td>
 
             </tbody>
             </table>
@@ -63,12 +48,10 @@
             <script src="https://d3js.org/d3.v7.min.js"></script>
             <script src="scripts/end.js"></script>
 
-            <div id="chart-container">
-              <div id="legend" class="legend-container"></div>
-            </div>
 
 
-            <script>
+
+            <script> //https://www.educative.io/answers/how-to-create-a-line-chart-using-d3
 // Sample D3.js script to visualize the budget data over the years
 document.addEventListener("DOMContentLoaded", function() {
     var sectionNames = [
@@ -149,12 +132,14 @@ const height = Math.max(500 - margin.top - margin.bottom, 0); // Maintain minimu
        .attr("y", height + margin.bottom - 10)
        .text("Year");
 
-    svg.append("text")
-       .attr("text-anchor", "end")
-       .attr("x", -margin.left + 10)
-       .attr("y", -10)
-       .attr("transform", "rotate(-90)")
-       .text("Budget Amount");
+       
+
+       svg.append("text")
+   .attr("text-anchor", "middle")
+   .attr("x", -margin.left*2) // Adjust as needed to move the label left or right
+   .attr("y", -65)
+   .attr("transform", "rotate(-90)")
+   .text("Budget Amount");
 
     // Line generator
     const line = d3.line()
