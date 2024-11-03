@@ -162,3 +162,23 @@ table{
       transform: translateX(0);
     }
   }
+
+
+
+  /* //legend */
+  .legend-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px; /* Add space between the SVG and legend */
+    align-items: flex-start; /* Align items to the left */
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; /* Space between legend items */
+}
+
+.graph{
+    font-size: 15px;
+}
