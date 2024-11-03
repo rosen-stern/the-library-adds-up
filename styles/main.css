@@ -1,14 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Gaegu&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Gaegu&family=Nova+Flat&display=swap');
 /*
   font-family: "Atkinson Hyperlegible", sans-serif;
     font-family: "Gaegu", sans-serif;
+      font-family: "Nova Flat", system-ui;
 
 */
 
 
 body {
     font-family: "Atkinson Hyperlegible", sans-serif;
+}
+
+#newspaper-headline {
+/* color: red; */
+    text-transform: uppercase;
+    font-family: "Nova Flat", system-ui;
 }
 
 /* HIDING BORDERS FOR THE ROWS */
@@ -66,8 +72,6 @@ table{
     border-color:black;
     border-style:solid;
     border-width:1px;
-
-    /* transition-duration: 1200ms; */
 
 }
 .tg  {
@@ -136,12 +140,7 @@ table{
 
 
 /* ANIMATIONS */
-.animate-out {
-    animation-name: move;
-    animation-duration: 2400ms;
-    animation-iteration-count: 1;
 
-}
 /* https://stackoverflow.com/questions/71813422/how-would-i-make-a-transition-for-the-div-to-slide-to-the-left-and-come-out-thro */
 @keyframes move {
     0% {

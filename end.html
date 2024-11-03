@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+
+
+
+    
+    <title>the library adds up</title>
+</head>
+<body>
+    
+    <!-- 
+    <img style="width: 64px; height: 64px; left: 1411px; top: 883px; position: absolute" src='assets/help.png' onmouseover="this.src='assets/help-color.png';" onmouseout="this.src='assets/help.png';" />
+         -->
+
+         <div class="center-body">
+
+            <table id="big-table" class="tg">
+                <thead>
+              <tr>
+                <th class="heading" id="newspaper-headline" colspan="4"> </th>
+              </tr></thead>
+            <tbody>
+              <tr id="total">
+                <td class="">Budget total</td>
+                <td class="budget-total" colspan="2" style="border: 1px solid black !important;">$<span id="budget-total">#</span></td>
+                <td class="item-alert"></td>
+              </tr>
+
+        <td class="section-title" colspan="4">Books and materials</td>
+              <tr class="item" id="item-1">
+                <td class="item-title">Books / other mateirals in collection<br><i>Anticipated cost: $<span class="anticipated" id="1-anticipated"></span></i></td>
+                <td class="item-budget">$<input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert"></td>
+              </tr>
+              <tr class="item" id="item-2">
+                <td class="item-title">Collection processing and distributing<br><i>Anticipated cost: $<span class="anticipated" id="2-anticipated"></span></i></td>
+                <td class="item-budget">$<input class="item-budget-input" type="number"></td>
+                <td class="item-percentage">%</td>
+                <td class="item-alert"></td>
+              </tr>
+              <tr>
+
+            </tbody>
+            </table>
+
+            <div class="submit-wrapper">
+              <div onclick="playAgain()" title="Try again with another library" id="submit-button" class="button submit">
+                
+                
+                <img src="assets/submit.png" style="width: 32px;" id="submit-icon">
+  <div>try again</div>
+              </div>
+  </div>
+            </div>
+
+            <script src="https://d3js.org/d3.v7.min.js"></script>
+            <script src="scripts/end.js"></script>
+
+            <div id="chart-container">
+              <div id="legend" class="legend-container"></div>
+            </div>
+
+
+            <script>
+// Sample D3.js script to visualize the budget data over the years
+document.addEventListener("DOMContentLoaded", function() {
+    var sectionNames = [
+        "Books / other materials in collection",
+        "Collection processing and distributing",
+        "Public services, collections, and access",
+        "Other personnel departments",
+        "Rent",
+        "Maintenance and upkeep",
+        "Programming supplies",
+        "City costs",
+        "Software",
+        "Other costs"
+    ];
+
+    // Simulated data retrieval from local storage (replace with actual data retrieval logic if needed)
+    const yearData = [];
+    const totalYears = parseInt(localStorage.getItem("final_year"));
+
+    for (let i = 0; i < totalYears; i++) {
+        const yearInfo = JSON.parse(localStorage.getItem("year_" + i) || "[]");
+        yearData.push(yearInfo.map((num, idx) => ({
+            year: i + 1,
+            category: sectionNames[idx],
+            value: parseFloat(num)
+        })));
+    }
+
+    // Flatten the data array
+    const flatData = yearData.flat();
+
+    // Group data by category
+    const groupedData = d3.group(flatData, d => d.category);
+
+   // Set up dimensions
+const margin = { top: 40, right: 20, bottom: 50, left: 80 };
+
+// Get the parent container's width
+const parentWidth = document.getElementById("chart-container").clientWidth;
+
+// Calculate dynamic width and height
+const width = parentWidth - margin.left - margin.right;
+const height = Math.max(500 - margin.top - margin.bottom, 0); // Maintain minimum height if needed
+
+    // Create SVG container
+    const svg = d3.select("#chart-container")
+                  .append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    // Set up scales
+    const xScale = d3.scaleLinear()
+                     .domain([1, totalYears])
+                     .range([0, width]);
+
+    const yScale = d3.scaleLinear()
+                     .domain([0, d3.max(flatData, d => d.value)])
+                     .nice()
+                     .range([height, 0]);
+
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+                         .domain(sectionNames);
+
+    // Add axes
+    svg.append("g")
+       .attr("transform", `translate(0, ${height})`)
+       .call(d3.axisBottom(xScale).ticks(totalYears).tickFormat(d3.format("d")));
+
+    svg.append("g")
+       .call(d3.axisLeft(yScale));
+
+    // Add labels
+    svg.append("text")
+       .attr("text-anchor", "end")
+       .attr("x", width / 2)
+       .attr("y", height + margin.bottom - 10)
+       .text("Year");
+
+    svg.append("text")
+       .attr("text-anchor", "end")
+       .attr("x", -margin.left + 10)
+       .attr("y", -10)
+       .attr("transform", "rotate(-90)")
+       .text("Budget Amount");
+
+    // Line generator
+    const line = d3.line()
+                   .x(d => xScale(d.year))
+                   .y(d => yScale(d.value));
+
+    // Draw lines for each category
+    groupedData.forEach((values, category) => {
+        svg.append("path")
+           .datum(values)
+           .attr("fill", "none")
+           .attr("stroke", colorScale(category))
+           .attr("stroke-width", 2)
+           .attr("d", line);
+    });
+
+  // Add data points with tooltips
+flatData.forEach((data, i) => {
+    const circle = svg.append("circle")
+       .attr("cx", xScale(data.year))
+       .attr("cy", yScale(data.value))
+       .attr("r", 4)
+       .style("fill", colorScale(data.category));
+
+    // Add title to each circle
+    circle.append("title").text(`${data.category}, Year ${data.year}\n$${data.value}`);
+});
+
+  // Add legend
+const legendContainer = d3.select("#legend");
+
+// Clear previous legend if exists
+legendContainer.selectAll("*").remove();
+
+const legend = legendContainer.selectAll(".legend")
+                      .data(sectionNames)
+                      .enter().append("div")
+                      .attr("class", "legend-item");
+
+legend.append("div")
+      .style("display", "inline-block")
+      .style("width", "18px")
+      .style("height", "18px")
+      .style("background", colorScale)
+      .style("margin-right", "8px");
+
+legend.append("span")
+      .text(d => d)
+      .style("cursor", "pointer")
+      .on("click", function(event, d) {
+          // Implement zoom on click
+          zoomToSection(d);
+      });
+
+
+});
+
+
+</script>
+
+</body>
+</html>

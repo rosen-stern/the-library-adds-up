@@ -1,9 +1,11 @@
 /* 
 TO DO: 
+- Show the graph of data over time on the end screen
 
 - Make the back button work to view previous budgets
 - Disable textboxes when going to a previous year 
-- Add lose condition, and end screen
+
+- Make rent only go up, not down
 
 */
 var big_table = document.getElementById("big-table");
@@ -23,7 +25,20 @@ var submit_button = document.getElementById("submit-button");
 
 var library_name = localStorage.getItem("library_name");
 
-document.getElementById("library-name").innerHTML = localStorage.getItem("library_name");
+document.getElementById("library-name").innerHTML = library_name;
+
+var sectionNames = [
+    "books",
+    "collection",
+    "public",
+    "other_departments",
+    "rent",
+    "maintenance",
+    "programming",
+    "city",
+    "software",
+    "other"
+] 
 
 
 var budget_history = [];
@@ -211,6 +226,20 @@ budget_history.push(this_year_info);
 
 // Move to the information screen with results from this year 
 
+if (checkGameOver()){
+    
+    for(var i = 0; i < year; i++){
+        localStorage.setItem("year_" + i, JSON.stringify(budget_history[i].actual));
+        // localStorage.setItem("year_" + i, budget_history[i].actual);
+    }
+    localStorage.setItem("final_year", year);
+    // localStorage.setItem("budget_history", budget_history);
+    // x = localStorage.getItem("year_0");
+    // console.log(x)
+
+    window.location.href = "end.html";
+}
+
 big_table.style.animation = "move 2400ms 1";
 
 setTimeout(() => {
@@ -219,8 +248,46 @@ setTimeout(() => {
 
 }
 
-
 big_table.addEventListener("animationend", function() {
     big_table.style.animation = "none";
 });
+
+function getIndexOf(sectionName){
+    for(var i = 0; i < sectionNames.length; i++){
+        if(sectionNames[i] == sectionName){
+            return i;
+        }
+    }
+}
+
+function checkGameOver(){
+ 
+    game_end_reason = "";
+
+    if(this_year_info.actual[getIndexOf("rent")] < this_year_info.anticipated[getIndexOf("rent")] //if the rent given is less than the anticipated rent
+    ){
+        game_end_reason = "IT COULDN'T PAY RENT";
+    }
+    if (this_year_info.actual[getIndexOf("city")] < this_year_info.anticipated[getIndexOf("city")]*.75 //if the city funds are less than 75% of what was anticipated
+    ){
+        game_end_reason = "IT DIDN'T PAY ENOUGH CITY FEES";
+    }
+    if(this_year_info.actual[getIndexOf("maintenance")] < this_year_info.anticipated[getIndexOf("maintenance")]* .5 //if the maintenance funds are less than 50% of what was requested
+    ){
+        game_end_reason = "IT COULDN'T KEEP UP WITH MAINTENANCE COSTS";
+    }    
+    if(this_year_info.actual[getIndexOf("public")] < this_year_info.anticipated[getIndexOf("public")]* .7 //if public services are less than 70%, they can't afford to run the library
+    ){
+        game_end_reason = "NO ONE WAS HIRED FOR THE CIRCULATION DESK";
+    }
+
+
+    if(game_end_reason != ""){
+        localStorage.setItem("game_end_reason", game_end_reason);
+        // console.log(library_name + "PUBLIC LIBRARY CLOSES BECAUSE " + game_end_reason);
+        return true;
+    } else {
+        return false;
+    }
+}
 
