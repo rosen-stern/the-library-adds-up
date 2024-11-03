@@ -5,7 +5,7 @@ var budget_history = localStorage.getItem("budget_history");
 document.getElementById("newspaper-headline").innerHTML = library_name + " PUBLIC LIBRARY CLOSES BECAUSE " + game_end_reason;
 
 function playAgain(){
-    window.location.href = "start.html";
+    window.location.href = "index.html";
 }
 
 
